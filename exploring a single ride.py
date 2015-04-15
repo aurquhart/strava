@@ -8,6 +8,7 @@ Created on Wed Apr  8 09:08:31 2015
 import os
 import gpxpy
 import csv
+import pandas as pd
 
 #import matplotlib.pyplot as plt
 
@@ -32,16 +33,20 @@ elevation = []
 for things in gpx.tracks:
     for lowerthings in things.segments:
         for pointthings in lowerthings.points:
+            lon.append(pointthings.longitude)
+            lat.append(pointthings.latitude)
             time.append(pointthings.time)
-            
+            elevation.append(pointthings.elevation)
+ 
+d = {'lon':lon, 'lat':lat, 'time':time, 'elevation':elevation} 
+
+df =   pd.DataFrame(data=d) 
+
+df.to_csv('C:/Users/angus/Documents/GitHub/strava/firstride.csv')
+
+       
 #In points we have longitude, lattitude, elevation,  time
             
-print(time[0])
 
-with open('C:/Users/angus/Documents/GitHub/strava.time.csv', "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    for val in time:
-        writer.writerow([val])
-            
 
     

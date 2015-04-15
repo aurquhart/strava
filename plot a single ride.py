@@ -13,35 +13,26 @@ import gpxpy
 os.chdir('C:/Users/angus/Documents/Python Scripts')
 
 #import 1st strava file
-gpx_file = open('stravadata/20130807-071108-Ride.gpx', 'r')
+gpx_file = open('stravadata/20150314-145601-Ride.gpx', 'r')
+#type(gpx_file) #file
 
 #
 gpx = gpxpy.parse(gpx_file)
+#type (gpx) #instance
 
-#This will start to flatten out the data
+#explore data
 
-for track in gpx.tracks:
-    for segment in track.segments:
-        for point in segment.points:
-            print 'Point at ({0},{1}) -> {2}'.format(point.latitude, point.longitude, point.elevation)
+#print(gpx)
+#GPX(tracks=[GPXTrack(name='Afternoon Ride', number=0, segments=[GPXTrackSegment(points=[...])])])
 
-#This way will create 2 lists of the longitudes and latitudes
-lat = []
-lon = []
+#for things in gpx.tracks:
+#    print(things)
+#so in tracks you have basically the top level info - name of ride
+    
+for ting in track.segments:
+    print ting
+#Nothing seems to be at this level
+    
 
-for track in gpx.tracks:
-    for segment in track.segments:
-        for point in segment.points:
-            lat.append(point.latitude)
-            lon.append(point.longitude)
-            
-print(lat)
-
-#Finally plot the data in matplot
-
-fig = plt.figure(facecolor = '0.05')
-ax = plt.Axes(fig, [0., 0., 1., 1.], )
-ax.set_aspect('equal')
-ax.set_axis_off()
-fig.add_axes(ax)
-plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
+for thing in segment.points:
+    print(thing)
